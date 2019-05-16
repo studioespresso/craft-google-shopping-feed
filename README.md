@@ -30,7 +30,7 @@ If you want to use the plugin with regular entries, want to provide your own Ele
 ### Products - craft.googleshopping.products
 Works with any **Commerce Products** element query, and will use the default variant for each product
 
-       {% set products = craft.products.limit(1) %}
+       {% set query = craft.products.limit(1) %}
        {{ craft.googleshopping.products(query) }}
 
 ### Entries - craft.googleshopping.entries

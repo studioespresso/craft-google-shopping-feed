@@ -33,6 +33,8 @@ class GoogleShoppingFeedVariable
             $fields = GoogleShoppingFeed::getInstance()->getSettings();
         }
         Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
+        $headers = Craft::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml; charset=utf-8');
         $feed = Craft::$app->view->renderTemplate('google-shopping-feed/_products', [
             'products' => $query->all(),
             'settings' => $fields,
@@ -58,6 +60,8 @@ class GoogleShoppingFeedVariable
         }
 
         Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
+        $headers = Craft::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml; charset=utf-8');
         $feed = Craft::$app->view->renderTemplate('google-shopping-feed/_entries', [
             'entries' => $query->all(),
             'settings' => $fields,
