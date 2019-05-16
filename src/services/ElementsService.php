@@ -13,6 +13,11 @@ use craft\commerce\elements\Product;
 use craft\elements\db\ElementQuery;
 use studioespresso\googleshoppingfeed\models\Settings;
 
+/**
+ * @author    Studio Espresso
+ * @package   GoogleShoppingFeed
+ * @since     1.0.0
+ */
 class ElementsService extends Component
 {
     public function getProducts(ElementQuery $query = null, Settings $settings = null)

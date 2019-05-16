@@ -15,6 +15,7 @@ use craft\web\twig\variables\CraftVariable;
 use craft\web\UrlManager;
 use studioespresso\googleshoppingfeed\models\Settings;
 use studioespresso\googleshoppingfeed\services\ElementsService;
+use studioespresso\googleshoppingfeed\variables\GoogleShoppingFeedVariable;
 use yii\base\Event;
 
 /**
@@ -97,7 +98,7 @@ class GoogleShoppingFeed extends Plugin
             function (Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
-//                $variable->set('catalog', );
+                $variable->set('googleshopping', GoogleShoppingFeedVariable::class);
             }
         );
     }
