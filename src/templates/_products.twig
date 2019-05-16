@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:admin="http://webns.net/mvcb/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:g="http://base.google.com/ns/1.0">
+    <channel>
+        <title>{{ systemName }}</title>
+        <link>{{ parseEnv(currentSite.baseUrl) }}</link>
+        {% for product in products %}
+        <item>
+            {% if settings.id == 'sku' %}
+                {% set id = product.defaultVariant.sku %}
+            {% else %}
+                {% if attribute(product, settings.id) is defined %}
+                    {% set id = attribute(product, settings.id) %}
+                {% elseif attribute(product.defaultVariant, settings.id) is defined %}
+                    {% set id = attribute(product.defaultVariant, settings.id) %}
+                {% endif %}
+            {% endif %}
+            <g:id>{{ id }}</g:id>
+            <title>{{ attribute(product, settings.title) }}</title>
+            <description>{{ attribute(product, settings.description)|striptags }}</description>
+            <link>{{ product.getUrl() }}</link>
+            {% if craft.commerce.paymentCurrencies.getAllPaymentCurrencies()|length == 1 %}
+                {% set currency = craft.commerce.paymentCurrencies.getPrimaryPaymentCurrencyIso() %}
+                <g:price>{{ attribute(product.defaultVariant, settings.price) }} {{ currency }}</g:price>
+            {% else %}
+                <g:price>{{ attribute(product.defaultVariant, settings.price) }} {{ settings.currencyIso }}</g:price>
+            {% endif %}
+            <g:condition>new</g:condition>
+            {% if product.defaultVariant.hasUnlimitedStock %}
+                <g:availability>in stock</g:availability>
+            {% elseif product.defaultVariant.stock > 0 %}
+                <g:availability>in stock</g:availability>
+            {% else %}
+                <g:availability>out of stock</g:availability>
+            {% endif %}
+            {% set imageLink = attribute(product, settings.image_link) %}
+            {% if imageLink|length %}
+                <g:image_link>{{ imageLink.one().getUrl() }}</g:image_link>
+            {% endif %}
+            {% if attribute(product, settings.brand) is instance of('craft\\elements\\db\\CategoryQuery') %}
+                {% if attribute(product, settings.brand)|length %}
+                    {% set brand = attribute(product, settings.brand).one().title %}
+                {% else %}
+                    {% set brand = '' %}
+                {% endif %}
+            {% elseif attribute(product, settings.brand) is instance of('craft\\elements\\db\\EntryQuery') %}
+                {% if attribute(product, settings.brand)|length %}
+                    {% set brand = attribute(product, settings.brand).one().title %}
+                {% else %}
+                    {% set brand = '' %}
+                {% endif %}
+            {% else %}
+                {% set brand = attribute(product, settings.brand) %}
+            {% endif %}
+            <g:brand>{{ brand }}</g:brand>
+        </item>
+        {% endfor %}
+    </channel>
+</rss>
