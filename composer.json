@@ -11,8 +11,8 @@
         "google shopping feed"
     ],
     "support": {
-        "docs": "https://github.com/studioespresso/craft3-google-shopping-feed/blob/master/README.md",
-        "issues": "https://github.com/studioespresso/craft3-google-shopping-feed/issues"
+        "docs": "https://github.com/studioespresso/craft-google-shopping-feed/blob/master/README.md",
+        "issues": "https://github.com/studioespresso/craft-google-shopping-feed/issues"
     },
     "license": "MIT",
     "authors": [
