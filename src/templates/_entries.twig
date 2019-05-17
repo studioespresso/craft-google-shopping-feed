@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:admin="http://webns.net/mvcb/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:g="http://base.google.com/ns/1.0">
+    <channel>
+        <title>{{ systemName }}</title>
+        <link>{{ parseEnv(currentSite.baseUrl) }}</link>
+        {% for product in products %}
+            <item>
+                <g:id>{{ attribute(entry, settings.id) }}</g:id>
+                <g:title>{{ attribute(entry, settings.title) }}</g:title>
+                <g:description>{{ attribute(entry, settings.description)|striptags }}</g:description>
+                <g:link>{{ entry.getUrl() }}</g:link>
+                {% set imageLink = attribute(entry, settings.image_link) %}
+                {% if imageLink|length %}
+                    <g:image_link>{{ imageLink.one().getUrl() }}</g:image_link>
+                {% endif %}
+                <g:brand>{{ attribute(entry, settings.brand) }}</g:brand>
+                <g:condition>new</g:condition>
+                <g:availability>in stock</g:availability>
+                <g:price>{{ attribute(entry, settings.price) }} {{ settings.currency }}</g:price>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

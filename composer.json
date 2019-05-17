@@ -1,0 +1,42 @@
+{
+    "name": "studioespresso/craft-google-shopping-feed",
+    "description": "A Google Shopping feed for Craft Commerce",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "google shopping feed"
+    ],
+    "support": {
+        "docs": "https://github.com/studioespresso/craft-google-shopping-feed/blob/master/README.md",
+        "issues": "https://github.com/studioespresso/craft-google-shopping-feed/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Studio Espresso",
+            "homepage": "https://studioespresso.co/en"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "studioespresso\\googleshoppingfeed\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Google Shopping Feed",
+        "handle": "google-shopping-feed",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "components": {
+            "elements": "studioespresso\\googleshoppingfeed\\services\\ElementsService"
+        },
+        "class": "studioespresso\\googleshoppingfeed\\GoogleShoppingFeed"
+    }
+}
