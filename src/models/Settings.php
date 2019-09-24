@@ -9,7 +9,6 @@
 namespace studioespresso\googleshoppingfeed\models;
 
 
-use Craft;
 use craft\base\Model;
 
 /**
@@ -43,6 +42,8 @@ class Settings extends Model
 
     public $brand;
 
+    public $brandCustom;
+
     public $currencyIso;
 
     // Public Methods
@@ -60,4 +61,5 @@ class Settings extends Model
             ['brand', 'required'],
         ];
     }
+
 }
