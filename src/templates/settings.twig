@@ -92,29 +92,53 @@
         errors: settings.errors and settings.errors['price'] is defined ? settings.errors['price']
     }) }}
 
-    {{ forms.selectField({
-        label: "Brand"|t('google-shopping-feed'),
-        id: "brand",
-        name: "brand",
-        required: true,
-        options: availableFields|merge({'custom': 'Custom value'}),
-        value: settings['brand'],
-        errors: settings.errors and settings.errors['brand'] is defined ? settings.errors['brand']
-    }) }}
-    {% if settings.brand == 'custom' %}
-        <div class="field" id="settings-brandCustom-field">
-            <div class="heading">
-                <label id="settings-brandCustom-label" for="settings-brandCustom">{{ "Custom brand value" }}</label>
-            </div>
-            <div class="input ltr">
-                <input class="text fullwidth" type="text" id="settings-brandCustom" name="brandCustom" value="{{ settings.brandCustom ?: ''}}" autocomplete="off">
+    <input type="hidden" name="brandCustom" value="">
+    <div class="flex">
+        <div class="flex">
+            {{ forms.selectField({
+                label: "Brand"|t('google-shopping-feed'),
+                id: "brand",
+                name: "brand",
+                required: true,
+                options: availableFields|merge({'custom': 'Custom value'}),
+                value: settings['brand'],
+                errors: settings.errors and settings.errors['brand'] is defined ? settings.errors['brand']
+            }) }}
+        </div>
+        <div class="flex-grow" style="padding-left: 10px;">
+            <div class="field" id="brandCustom-field" style="display: none;">
+                <div class="heading required">
+                    <label id="brandCustom-label"
+                           for="brandCustom">{{ "Custom brand value" }}</label>
+                </div>
+                <div class="input ltr">
+                    <input class="text" required type="text" id="brandCustom" name="brandCustom"
+                           value="{{ settings.brandCustom ?: '' }}" autocomplete="off">
+                </div>
             </div>
         </div>
-    {% endif %}
+    </div>
     {% js at POS_END %}
+        if($('#settings-brand').val() === 'custom') {
+            $custom = $('#settings-brandCustom-field');
+            $custom.show();
+        } else {
+            $custom = $('#settings-brandCustom-field');
+            $custom.find('input').attr('disabled', 'disabled');
+        }
+
         $('#settings-brand').change(function() {
-           $this = $(this);
-           console.log($this.val());
+            var $this = $(this);
+            if($this.val() != 'custom') {
+                $custom = $('#settings-brandCustom-field');
+                $custom.find('input').attr('disabled');
+                $custom.find('input').val('');
+                $custom.hide();
+            } else {
+                $custom = $('#settings-brandCustom-field');
+                $custom.find('input').removeAttr('disabled');
+                $custom.show();
+            }
         });
     {% endjs %}
 
