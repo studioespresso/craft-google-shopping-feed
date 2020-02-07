@@ -46,6 +46,12 @@ class Settings extends Model
 
     public $currencyIso;
 
+    /**
+     * @var Manufacturer Part Number (MPN)
+     * See https://support.google.com/merchants/answer/6324482
+     */
+    public $mpn;
+
     // Public Methods
     // =========================================================================
 

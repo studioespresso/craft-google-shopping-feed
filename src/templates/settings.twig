@@ -162,6 +162,15 @@
         errors: settings.errors and settings.errors['image_link'] is defined ? settings.errors['image_link']
     }) }}
 
+    {{ forms.selectField({
+        label: "Manufacturer Part Number (MPN)"|t('google-shopping-feed'),
+        id: "mpn",
+        name: "mpn",
+        options: availableFields,
+        value: settings['mpn'],
+        errors: settings.errors and settings.errors['mpn'] is defined ? settings.errors['mpn']
+    }) }}
+
 
     {% if craft.commerce.paymentCurrencies.getAllPaymentCurrencies()|length > 1 %}
         {% set currencies = [] %}

@@ -23,6 +23,9 @@
                 <g:condition>new</g:condition>
                 <g:availability>in stock</g:availability>
                 <g:price>{{ attribute(entry, settings.price) }} {{ settings.currency }}</g:price>
+                {% if settings.mpn %}
+                    <g:mpn>{{ attribute(entry, settings.mpn) }}</g:mpn>
+                {% endif %}
             </item>
         {% endfor %}
     </channel>
