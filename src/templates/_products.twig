@@ -56,7 +56,12 @@
                 {% endif %}
                 <g:brand>{{ brand }}</g:brand>
                 {% if settings.mpn %}
-                    <g:mpn>{{ attribute(product, settings.mpn) }}</g:mpn>
+                    {% if settings.mpn == 'sku'  %}
+                        {% set npm = product.defaultVariant.sku %}
+                        <g:mpn>{{ npm }}</g:mpn>
+                    {% else %}
+                        <g:mpn>{{ attribute(product, settings.mpn) }}</g:mpn>
+                    {% endif %}
                 {% endif %}
             </item>
         {% endfor %}
