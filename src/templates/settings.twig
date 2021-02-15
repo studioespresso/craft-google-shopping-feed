@@ -25,17 +25,17 @@
             {% for id, site in craft.app.sites.getAllSites() %}
                 {% set availableSites = availableSites|merge([{
                     'label': site.name,
-                    'value': site.id
+                    'value': site.uid
                 }]) %}
             {% endfor %}
             {{ forms.selectField({
                 label: "To which site should your products link?"|t('google-shopping-feed'),
-                id: "siteId",
-                name: "siteId",
+                id: "siteUid",
+                name: "siteUid",
                 required: true,
                 options: availableSites,
-                value: settings['siteId'] ? settings['siteId'],
-                errors: settings.errors and settings.errors['siteId'] is defined ? settings.errors['siteId']
+                value: settings['siteUid'] ? settings['siteUid'],
+                errors: settings.errors and settings.errors['siteUid'] is defined ? settings.errors['siteUid']
             }) }}
         {% endif %}
     </div>

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.3.0 - 2021-02-15
+### Added
+- Added better support for project config in settings [#10](https://github.com/studioespresso/craft-google-shopping-feed/issues/10)
+
 ## 1.2.1 - 2020-04-21
 ### Added
 - Make the NPM field work with the product SKU
