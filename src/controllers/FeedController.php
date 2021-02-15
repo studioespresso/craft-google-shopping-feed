@@ -40,7 +40,7 @@ class FeedController extends Controller
     public function actionIndex()
     {
         $settings = GoogleShoppingFeed::getInstance()->getSettings();
-        $products = GoogleShoppingFeed::$plugin->elements->getProducts(null, $settings);
+        $products = GoogleShoppingFeed::getInstance()->elements->getProducts(null, $settings);
         Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
 
         $headers = Craft::$app->response->headers;

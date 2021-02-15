@@ -28,7 +28,12 @@ class Settings extends Model
 
     public $id = 'sku';
 
+    /**
+     * @deprecated Since 1.3.0 we switched to using $siteUid
+     */
     public $siteId;
+
+    public $siteUid;
 
     public $title = 'title';
 

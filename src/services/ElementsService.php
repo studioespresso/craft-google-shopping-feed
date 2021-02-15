@@ -11,6 +11,7 @@ namespace studioespresso\googleshoppingfeed\services;
 use craft\base\Component;
 use craft\commerce\elements\Product;
 use craft\elements\db\ElementQuery;
+use craft\helpers\StringHelper;
 use studioespresso\googleshoppingfeed\models\Settings;
 
 /**
@@ -25,9 +26,12 @@ class ElementsService extends Component
         if (!$query) {
             $query = Product::find()->limit(null);
         }
-        if($settings->siteId) {
-            $query->siteId($settings->siteId);
+        if(!$settings->siteUid) {
+            $site = \Craft::$app->getSites()->getSiteById($settings->siteId);
+        } else {
+            $site = \Craft::$app->getSites()->getSiteByUid($settings->siteUid);
         }
+        $query->siteId($site->id);
 
         return $query->all();
     }
