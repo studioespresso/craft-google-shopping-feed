@@ -6,6 +6,7 @@
         <link>{{ parseEnv(currentSite.baseUrl) }}</link>
         {% for product in products %}
             <item>
+                {# SKU field #}
                 {% if settings.id == 'sku' %}
                     {% set id = product.defaultVariant.sku %}
                 {% else %}
@@ -16,16 +17,28 @@
                     {% endif %}
                 {% endif %}
                 <g:id>{{ id }}</g:id>
+
+                {# Title field #}
                 <title>{{ attribute(product, settings.title) }}</title>
+
+                {# Description field #}
                 <description>{{ attribute(product, settings.description)|striptags }}</description>
+
+                {# Product URL #}
                 <link>{{ product.getUrl() }}</link>
+
+                {# Price field #}
                 {% if craft.commerce.paymentCurrencies.getAllPaymentCurrencies()|length == 1 %}
                     {% set currency = craft.commerce.paymentCurrencies.getPrimaryPaymentCurrencyIso() %}
                     <g:price>{{ attribute(product.defaultVariant, settings.price) }} {{ currency }}</g:price>
                 {% else %}
                     <g:price>{{ attribute(product.defaultVariant, settings.price) }} {{ settings.currencyIso }}</g:price>
                 {% endif %}
+
+                {# Condition (const) #}
                 <g:condition>new</g:condition>
+
+                {# Stock #}
                 {% if product.defaultVariant.hasUnlimitedStock %}
                     <g:availability>in stock</g:availability>
                 {% elseif product.defaultVariant.stock > 0 %}
@@ -33,10 +46,14 @@
                 {% else %}
                     <g:availability>out of stock</g:availability>
                 {% endif %}
+
+                {# Image field #}
                 {% set imageLink = attribute(product, settings.image_link) %}
                 {% if imageLink|length %}
                     <g:image_link>{{ imageLink.one().getUrl() }}</g:image_link>
                 {% endif %}
+
+                {# Brand field #}
                 {% if settings.brand == 'custom' and settings.brandCustom|length %}
                     {% set brand = settings.brandCustom %}
                 {% elseif attribute(product, settings.brand) is instance of('craft\\elements\\db\\CategoryQuery') %}
@@ -55,6 +72,8 @@
                     {% set brand = attribute(product, settings.brand) %}
                 {% endif %}
                 <g:brand>{{ brand }}</g:brand>
+
+                {# NPM field #}
                 {% if settings.mpn %}
                     {% if settings.mpn == 'sku'  %}
                         {% set npm = product.defaultVariant.sku %}
