@@ -26,10 +26,13 @@ class ElementsService extends Component
         if (!$query) {
             $query = Product::find()->limit(null);
         }
-        if(!$settings->siteUid) {
+        
+        if($settings->siteUid) {
+            $site = \Craft::$app->getSites()->getSiteByUid($settings->siteUid);
+        } elseif($settings->siteId) {
             $site = \Craft::$app->getSites()->getSiteById($settings->siteId);
         } else {
-            $site = \Craft::$app->getSites()->getSiteByUid($settings->siteUid);
+            $site = \Craft::$app->getSites()->getPrimarySite();
         }
         $query->siteId($site->id);
 

@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.3.1 - 2021-03-13
+### Fixed
+- Fixed an error with the change site settings from 1.3.0 [#12](https://github.com/studioespresso/craft-google-shopping-feed/issues/12)
+
+
 ## 1.3.0 - 2021-02-15
 ### Added
 - Added better support for project config in settings [#10](https://github.com/studioespresso/craft-google-shopping-feed/issues/10)
