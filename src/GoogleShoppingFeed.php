@@ -9,6 +9,7 @@
 namespace studioespresso\googleshoppingfeed;
 
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\events\RegisterUrlRulesEvent;
 use craft\web\twig\variables\CraftVariable;
@@ -35,7 +36,7 @@ class GoogleShoppingFeed extends Plugin
 
     // Public Properties
     // =========================================================================
-    public $schemaVersion = '1.0.0';
+    public string $schemaVersion = '1.0.0';
 
     // Public Methods
     // =========================================================================
@@ -53,7 +54,7 @@ class GoogleShoppingFeed extends Plugin
     /**
      * @inheritdoc
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?Model
     {
         return new Settings();
     }
